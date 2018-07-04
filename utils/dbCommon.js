@@ -7,10 +7,10 @@ var db = {};
 var mysql = require('mysql');
 var pool = mysql.createPool({
   connectionLimit : 10,
-  host            : 'localhost',
+  host            : '47.92.6.41',
   user            : 'root',
-  password        : '',
-  database        : 'test'
+  password        : '199358',
+  database        : 'mysql'
 });
 
 db.query = function(sql, callback) {
