@@ -3,9 +3,9 @@
  * @type {{}}
  */
 
-var db = {};
-var mysql = require('mysql');
-var pool = mysql.createPool({
+const db = {};
+const mysql = require('mysql');
+const pool = mysql.createPool({
   connectionLimit : 10,
   host            : '47.92.6.41',
   user            : 'root',
@@ -30,4 +30,4 @@ db.query = function(sql, callback) {
   });
 }
 
-module.exports = db;
+export default db;

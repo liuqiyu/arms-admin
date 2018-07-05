@@ -13,7 +13,7 @@ app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
   res.header("X-Powered-By",' 3.2.1');
-  res.header("Content-Type", "application/json;charset=utf-8");
+  // res.header("Content-Type", "application/json;charset=utf-8");
   // 将外源设为指定的域，比如：http://localhost:8080
   res.header('Access-Control-Allow-Origin', "http://localhost:8080");
   // 将Access-Control-Allow-Credentials设为true

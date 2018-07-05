@@ -1,7 +1,7 @@
 var api = require('./api');
 
 const router = app => {
-  app.use('/api', api);
+  app.use('/arms', api);
   
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {

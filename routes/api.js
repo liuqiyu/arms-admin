@@ -1,7 +1,8 @@
-var express = require('express');
-var api = require('./../controller/api/index');
+import express from 'express';
+import api from './../controller/api/index';
 const router = express.Router();
 
-router.get('/getList', api.getList);  // 注册
+router.get('/navList', api.getNavList);
+router.get('/dataList', api.getArmsList);
 
 module.exports = router;
