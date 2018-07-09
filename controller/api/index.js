@@ -61,11 +61,34 @@ const getNavList = (req, res, next) => {
  * @param next
  */
 const getArmsList = (req, res, next) => {
-  const selectSql = "select a.id, a.name, a.img_src, t.id type_id, t.name type_name, a.descript, a.remarks from arms as a join arms_type as t on t.id = a.type_id";
+  console.log(req.query)
+  let type_id, id;
+  
+  const start = (req.query.page - 1) * req.query.count;
+  const end = req.query.page * req.query.count;
+  
+  
+  let sq = "";
+  
+  if (req.query.type_id) {
+    sq += "where t.id = '" + req.query.type_id + "'";
+  }
+  
+  if (req.query.id) {
+    sq += " and a.id = '" + req.query.id + "'";
+  }
+  
+  console.log(sq)
+  
+  const selectSql = "select a.id, a.name, a.img_src, t.id type_id, " +
+    "t.name type_name, a.descript, a.remarks from arms as a join arms_type as t on t.id = a.type_id " + sq + " LIMIT " + start + " , " + end;
+  console.log(selectSql)
+  
   db.query(selectSql, async (err, rows, fields) => {
     if (err) {
       return console.error(err);
     }
+    console.log(rows);
     if (rows.length > 0) {
       res.send({
         code: 200,
@@ -74,6 +97,7 @@ const getArmsList = (req, res, next) => {
         data: rows,
       });
     }
+    
   });
 }
 

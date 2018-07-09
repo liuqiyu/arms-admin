@@ -25,7 +25,7 @@ db.query = function(sql, callback) {
       callback(err, null);
       return;
     };
-  
+  .0
     callback(null, rows, fields);
   });
 }
