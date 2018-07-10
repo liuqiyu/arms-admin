@@ -61,7 +61,6 @@ const getNavList = (req, res, next) => {
  * @param next
  */
 const getArmsList = (req, res, next) => {
-  console.log(req.query)
   let type_id, id;
   
   const start = (req.query.page - 1) * req.query.count;
@@ -78,11 +77,9 @@ const getArmsList = (req, res, next) => {
     sq += " and a.id = '" + req.query.id + "'";
   }
   
-  console.log(sq)
-  
   const selectSql = "select a.id, a.name, a.img_src, t.id type_id, " +
-    "t.name type_name, a.descript, a.remarks from arms as a join arms_type as t on t.id = a.type_id " + sq + " LIMIT " + start + " , " + end;
-  console.log(selectSql)
+    "t.name type_name, a.descript, a.remarks from arms as a join arms_type as t on t.id = a.type_id " + sq + " ORDER BY id asc LIMIT " + start + " , " + end;
+  console.log(selectSql);
   
   db.query(selectSql, async (err, rows, fields) => {
     if (err) {
@@ -99,9 +96,33 @@ const getArmsList = (req, res, next) => {
     }
     
   });
-}
+};
+
+/**
+ * 获取banner列表
+ * @param req
+ * @param res
+ * @param next
+ */
+const getBanner = (req, res, next) => {
+    const selectSql = "select * from arms_banner";
+
+    db.query(selectSql, async (err, rows, fields) => {
+        if (err) {
+            return console.error(err);
+        }
+        if (rows.length > 0) {
+            res.send({
+                code: 200,
+                status: 'success',
+                message: '操作成功！',
+                data: rows,
+            });
+        }
+
+    });
+};
 
 export default {
-  getNavList,
-  getArmsList,
+  getNavList, getArmsList, getBanner,
 };
